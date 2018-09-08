@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -44,7 +44,9 @@ namespace Gcpe.Hub.NRMS
 
             services.AddHealthChecks(checks =>
             {
-                checks.AddSqlCheck("Gcpe.Hub", Configuration["HubDbContext"]);
+                // checks.AddSqlCheck("Gcpe.Hub", Configuration["HubDbContext"]);
+                // checks.AddUrlCheck("https://github.com");
+                checks.AddCheck("Webserver is running", () => HealthCheckResult.Healthy("Ok"));
             });
         }
 

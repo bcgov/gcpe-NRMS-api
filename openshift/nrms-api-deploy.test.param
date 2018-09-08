@@ -1,0 +1,15 @@
+#=========================================================
+# OpenShift template parameters for:
+# Component: .
+# Template File: templates/nrms-api/nrms-api-deploy.yaml
+#=========================================================
+# NAME=nrms-api
+# SOURCE_IMAGE_NAME=nrms-api
+APPLICATION_DOMAIN=nrms-api-nrms-test.pathfinder.gov.bc.ca
+# IMAGE_NAMESPACE=nrms-tools
+TAG_NAME=test
+# ASPNETCORE_ENVIRONMENT=Development
+# CPU_LIMIT=1
+# MEMORY_LIMIT=4Gi
+# CPU_REQUEST=100m
+# MEMORY_REQUEST=2Gi

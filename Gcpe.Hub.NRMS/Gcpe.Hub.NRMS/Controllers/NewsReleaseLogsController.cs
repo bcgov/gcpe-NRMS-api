@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 namespace Gcpe.Hub.NRMS.Controllers
 {
     [Route("/api/newsreleases/{newsreleaseid}/logs")]
+    [ApiController]
     public class NewsReleaseLogsController : ControllerBase
     {
         private readonly IRepository _repository;

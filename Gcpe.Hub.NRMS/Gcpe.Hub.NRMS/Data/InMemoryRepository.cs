@@ -1,6 +1,6 @@
-﻿using Gcpe.Hub.NRMS.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using Gcpe.Hub.NRMS.Models;
 
 namespace Gcpe.Hub.NRMS.Data
 {
@@ -15,12 +15,12 @@ namespace Gcpe.Hub.NRMS.Data
 
         public IEnumerable<NewsRelease> GetAllReleases()
         {
-            return _ctx.NewsReleases.ToList();
+            return _ctx.GetAll();
         }
 
         public NewsRelease GetReleaseByKey(string key)
         {
-            return _ctx.NewsReleases.FirstOrDefault(r => r.Key == key);
+            return _ctx.Get(key);
         }
 
         public void AddEntity(object model)

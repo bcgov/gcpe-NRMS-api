@@ -18,4 +18,4 @@ export builds=${builds:-""}
 export images=${images:-"nrms-api"}
 
 # The routes for the project
-export routes=${routes:-""}
+export routes=${routes:-"nrms-api"}
