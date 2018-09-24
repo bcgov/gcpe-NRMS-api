@@ -1,0 +1,38 @@
+########################################################################
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs
+########################################################################
+
+# Editor configuration, see http://editorconfig.org
+root = true
+
+# All files
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Markdown
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+
+# SASS
+[*.scss]
+indent_style = space
+indent_size = 4
+
+# Code files
+[*.{cs,vb}]
+indent_size = 4
+trim_trailing_whitespace = true
+charset = utf-8-bom
+
+###############################
+# .NET Coding Conventions     #
+###############################
+
+# Full .NET Coding Conventions available at:
+# https://docs.microsoft.com/en-us/visualstudio/ide/editorconfig-code-style-settings-reference?view=vs-2017#example-editorconfig-file

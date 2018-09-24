@@ -5,6 +5,7 @@ using Gcpe.Hub.NRMS.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 
 namespace Gcpe.Hub.NRMS.Controllers
 {
@@ -33,7 +34,7 @@ namespace Gcpe.Hub.NRMS.Controllers
         {
             try
             {
-                return Ok(_repository.GetAllReleases());
+                return Ok(_repository.GetAllReleases().ToList());
             }
             catch (Exception ex)
             {
