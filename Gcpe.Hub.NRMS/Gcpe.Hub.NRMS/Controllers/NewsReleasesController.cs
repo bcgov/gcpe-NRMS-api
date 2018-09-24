@@ -2,6 +2,7 @@
 using Gcpe.Hub.NRMS.Data;
 using Gcpe.Hub.NRMS.Models;
 using Gcpe.Hub.NRMS.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -9,6 +10,7 @@ using System.Linq;
 
 namespace Gcpe.Hub.NRMS.Controllers
 {
+    [Authorize]
     [Route("api/[Controller]")]
     [ApiController]
     [Produces("application/json")]
