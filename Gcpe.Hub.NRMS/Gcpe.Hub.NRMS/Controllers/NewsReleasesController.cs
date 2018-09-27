@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Gcpe.Hub.NRMS.Data;
+using Gcpe.Hub.NRMS.Helpers;
 using Gcpe.Hub.NRMS.Models;
 using Gcpe.Hub.NRMS.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Gcpe.Hub.NRMS.Controllers
 {
@@ -32,11 +34,16 @@ namespace Gcpe.Hub.NRMS.Controllers
         [HttpGet("")]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public IActionResult Get()
+        public IActionResult Get([FromQuery] NewsReleaseParams newsReleaseParams)
         {
             try
             {
-                return Ok(_repository.GetAllReleases().ToList());
+                var newsReleases = _repository.GetAllReleases();
+                var pagedNewsReleases = PagedList<NewsRelease>.Create(newsReleases, newsReleaseParams.PageNumber, newsReleaseParams.PageSize);
+
+                Response.AddPagination(newsReleaseParams.PageNumber, newsReleaseParams.PageSize, newsReleases.Count(), 10);
+
+                return Ok(pagedNewsReleases);
             }
             catch (Exception ex)
             {

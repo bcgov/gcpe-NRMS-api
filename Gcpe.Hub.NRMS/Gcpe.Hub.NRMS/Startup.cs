@@ -90,6 +90,8 @@ namespace Gcpe.Hub.NRMS
                 // checks.AddUrlCheck("https://github.com");
                 checks.AddCheck("Webserver is running", () => HealthCheckResult.Healthy("Ok"));
             });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -101,10 +103,15 @@ namespace Gcpe.Hub.NRMS
             }
             else
             {
-                app.UseHsts();
+                // app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
+
+            
+
+            // temporary CORS fix
+            app.UseCors(opts => opts.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthentication();
 

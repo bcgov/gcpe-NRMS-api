@@ -10,7 +10,7 @@ namespace Gcpe.Hub.NRMS.Data
     {
 
         List<NewsRelease> _releases;
-        const int releasesToCreate = 1000;
+        const int releasesToCreate = 40;
 
         public List<NewsRelease> NewsReleases { get => _releases; set => _releases = value; }
 
