@@ -1,6 +1,7 @@
 using AutoMapper;
 using Gcpe.Hub.NRMS.Controllers;
 using Gcpe.Hub.NRMS.Data;
+using Gcpe.Hub.NRMS.Helpers;
 using Gcpe.Hub.NRMS.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -49,7 +50,7 @@ namespace Gcpe.Hub.NRMS.Tests.ControllerTests
 
             var controller = new NewsReleasesController(mockRepository.Object, mockLogger.Object, mockMapper.Object);
 
-            var httpResult = controller.Get();
+            var httpResult = controller.Get(new NewsReleaseParams());
             Assert.IsInstanceOfType(httpResult, typeof(OkObjectResult));
         }
 

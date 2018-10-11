@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Gcpe.Hub.NRMS.Controllers
 {
-    [Authorize]
+    // TODO: Re-enable this ==> [Authorize]
     [Route("api/[Controller]")]
     [ApiController]
     [Produces("application/json")]

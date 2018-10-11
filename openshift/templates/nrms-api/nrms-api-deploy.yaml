@@ -1,15 +1,17 @@
 kind: Template
 apiVersion: v1
+labels:
+  app: "${NAME}"
+  template: "${NAME}-deployment"
+  tier: backend
 metadata:
-  name: '${NAME}-deployment-template'
+  name: "${NAME}-deployment-template"
   creationTimestamp: null
 objects:
   - kind: Service
     apiVersion: v1
     metadata:
-      name: '${NAME}'
-      labels:
-        template: '${NAME}-deployment'
+      name: "${NAME}"
       annotations:
         description: Exposes and load balances the application pods.
     spec:
@@ -19,31 +21,27 @@ objects:
           port: 8080
           targetPort: 8080
       selector:
-        name: '${NAME}'
+        name: "${NAME}"
       type: ClusterIP
       sessionAffinity: None
   - kind: Route
     apiVersion: v1
     metadata:
-      name: '${NAME}'
-      labels:
-        template: '${NAME}-deployment'
+      name: "${NAME}"
     spec:
-      host: '${APPLICATION_DOMAIN}'
+      host: "${APPLICATION_DOMAIN}"
       to:
         kind: Service
-        name: '${NAME}'
+        name: "${NAME}"
         weight: 100
       port:
         targetPort: 8080-tcp
   - kind: DeploymentConfig
     apiVersion: v1
     metadata:
-      name: '${NAME}'
-      labels:
-        template: '${NAME}-deployment'
+      name: "${NAME}"
       annotations:
-        description: 'Defines how to deploy ${NAME}'
+        description: "Defines how to deploy ${NAME}"
     spec:
       strategy:
         type: Rolling
@@ -53,36 +51,36 @@ objects:
           imageChangeParams:
             automatic: true
             containerNames:
-              - '${NAME}'
+              - "${NAME}"
             from:
               kind: ImageStreamTag
-              namespace: '${IMAGE_NAMESPACE}'
-              name: '${SOURCE_IMAGE_NAME}:${TAG_NAME}'
+              namespace: "${IMAGE_NAMESPACE}"
+              name: "${SOURCE_IMAGE_NAME}:${TAG_NAME}"
       replicas: 1
       selector:
-        name: '${NAME}'
+        name: "${NAME}"
       template:
         metadata:
-          name: '${NAME}'
+          name: "${NAME}"
           labels:
-            name: '${NAME}'
+            name: "${NAME}"
         spec:
           containers:
-            - name: '${NAME}'
-              image: ''
+            - name: "${NAME}"
+              image: ""
               ports:
                 - containerPort: 8080
                   protocol: TCP
               env:
                 - name: ASPNETCORE_ENVIRONMENT
-                  value: '${ASPNETCORE_ENVIRONMENT}'
+                  value: "${ASPNETCORE_ENVIRONMENT}"
               resources:
                 limits:
-                  cpu: '${CPU_LIMIT}'
-                  memory: '${MEMORY_LIMIT}'
+                  cpu: "${CPU_LIMIT}"
+                  memory: "${MEMORY_LIMIT}"
                 requests:
-                  cpu: '${CPU_REQUEST}'
-                  memory: '${MEMORY_REQUEST}'
+                  cpu: "${CPU_REQUEST}"
+                  memory: "${MEMORY_REQUEST}"
               readinessProbe:
                 httpGet:
                   path: /hc
@@ -93,7 +91,7 @@ objects:
                 periodSeconds: 10
                 successThreshold: 1
                 failureThreshold: 3
-              liveinessProbe:
+              livenessProbe:
                 httpGet:
                   path: /hc
                   port: 8080
@@ -106,7 +104,8 @@ objects:
 parameters:
   - name: NAME
     displayName: Name
-    description: The name assigned to all of the resources defined in this template.
+    description:
+      The name assigned to all of the resources defined in this template.
     required: true
     value: nrms-api
   - name: SOURCE_IMAGE_NAME
@@ -119,7 +118,7 @@ parameters:
     description: >-
       The exposed hostname that will route to the application, if left blank a
       value will be defaulted.
-    value: ''
+    value: ""
   - name: IMAGE_NAMESPACE
     displayName: Image Namespace
     description: >-
@@ -129,7 +128,7 @@ parameters:
     value: nrms-tools
   - name: TAG_NAME
     displayName: Environment TAG name
-    description: 'The TAG name for this environment, e.g., dev, test, prod'
+    description: "The TAG name for this environment, e.g., dev, test, prod"
     required: true
     value: dev
   - name: ASPNETCORE_ENVIRONMENT
@@ -142,7 +141,7 @@ parameters:
   - name: CPU_LIMIT
     displayName: CPU Limit
     description: Maximum amount of CPU the container can use.
-    value: '1'
+    value: "1"
   - name: MEMORY_LIMIT
     displayName: Memory Limit
     description: Maximum amount of memory the container can use.

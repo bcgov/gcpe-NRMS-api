@@ -30,13 +30,14 @@ namespace Gcpe.Hub.NRMS.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet]
         public IActionResult Search([FromQuery] SearchParams searchParams)
         {
             Thread.Sleep(1000); // sleep so it takes a second to return the results to the client
             return Ok(_repository.GetAllArticles(searchParams));
         }
 
-        [Route("suggestions")]
+        [HttpGet("suggestions")]
         public IActionResult Suggestions()
         {
             var suggestions = _repository.GetAllArticles(null)
