@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,17 +32,23 @@ namespace Gcpe.Hub.NRMS.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("")]
+        public IEnumerable<NewsRelease> GetResultsPage(NewsReleaseParams newsReleaseParams)
+        {
+            var newsReleases = _repository.GetAllReleases();
+            var pagedNewsReleases = PagedList<NewsRelease>.Create(newsReleases, newsReleaseParams.PageNumber, newsReleaseParams.PageSize);
+            return pagedNewsReleases;
+        }
+
+        [HttpGet]
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
-        public IActionResult Get([FromQuery] NewsReleaseParams newsReleaseParams)
+        public IActionResult GetAll([FromQuery] NewsReleaseParams newsReleaseParams)
         {
             try
             {
-                var newsReleases = _repository.GetAllReleases();
-                var pagedNewsReleases = PagedList<NewsRelease>.Create(newsReleases, newsReleaseParams.PageNumber, newsReleaseParams.PageSize);
-
-                Response.AddPagination(newsReleaseParams.PageNumber, newsReleaseParams.PageSize, newsReleases.Count(), 10);
+                var count = _repository.GetAllReleases().Count();
+                var pagedNewsReleases = this.GetResultsPage(newsReleaseParams);
+                Response.AddPagination(newsReleaseParams.PageNumber, newsReleaseParams.PageSize, count, 10);
 
                 return Ok(pagedNewsReleases);
             }
@@ -56,7 +63,7 @@ namespace Gcpe.Hub.NRMS.Controllers
         [ProducesResponseType(200)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
-        public IActionResult Get(string id)
+        public IActionResult GetById(string id)
         {
             try
             {
