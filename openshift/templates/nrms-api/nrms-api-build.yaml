@@ -35,6 +35,10 @@ objects:
           env:
             - name: DOTNET_STARTUP_PROJECT
               value: "${DOTNET_STARTUP_PROJECT}"
+            - name: DOTNET_TEST_PROJECTS
+              value: "${DOTNET_TEST_PROJECTS}"
+            - name: DOTNET_RM_SRC
+              value: "${DOTNET_RM_SRC}"
       output:
         to:
           kind: ImageStreamTag
@@ -94,6 +98,22 @@ parameters:
     description: The path to the startup project for the .Net application.
     required: true
     value: Gcpe.Hub.NRMS/Gcpe.Hub.NRMS
+  - name: DOTNET_TEST_PROJECTS
+    displayName: DotNet Test Project(s)
+    description: >-
+      Used to specify the list of test projects to run. This must be project
+      files or folders containing a single project file. dotnet test is invoked
+      for each item.
+    required: true
+    value:
+      Gcpe.Hub.NRMS/Gcpe.Hub.NRMS.Tests
+      Gcpe.Hub.NRMS/Gcpe.Hub.NRMS.IntegrationTests
+  - name: DOTNET_RM_SRC
+    displayName: Remove DotNet source code
+    description:
+      When set to true, the source code will not be included in the final image.
+    required: true
+    value: "true"
   - name: CPU_LIMIT
     displayName: Resources CPU Limit
     description: The resources CPU limit (in cores) for this build.

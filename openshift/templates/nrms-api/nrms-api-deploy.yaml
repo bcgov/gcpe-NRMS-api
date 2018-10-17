@@ -108,11 +108,6 @@ parameters:
       The name assigned to all of the resources defined in this template.
     required: true
     value: nrms-api
-  - name: SOURCE_IMAGE_NAME
-    displayName: Source Image Name
-    description: The name of the image to use for this resource.
-    required: true
-    value: nrms-api
   - name: APPLICATION_DOMAIN
     displayName: Application Hostname
     description: >-
@@ -126,9 +121,14 @@ parameters:
       application.
     required: true
     value: nrms-tools
+  - name: SOURCE_IMAGE_NAME
+    displayName: Source Image Name
+    description: The name of the image to use for this resource.
+    required: true
+    value: nrms-api
   - name: TAG_NAME
     displayName: Environment TAG name
-    description: "The TAG name for this environment, e.g., dev, test, prod"
+    description: The TAG name for this environment, e.g., dev, test, prod
     required: true
     value: dev
   - name: ASPNETCORE_ENVIRONMENT

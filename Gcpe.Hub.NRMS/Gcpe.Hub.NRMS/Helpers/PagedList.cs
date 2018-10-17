@@ -11,7 +11,7 @@ namespace Gcpe.Hub.NRMS.Helpers
         public static IEnumerable<T> Create(IEnumerable<T> source,
             int pageNumber, int pageSize)
         {
-            return source.Skip(pageNumber * pageSize).Take(pageSize).ToList();
+            return source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
         }
     }
 }
