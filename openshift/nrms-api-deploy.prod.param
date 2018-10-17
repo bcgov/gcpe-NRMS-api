@@ -4,11 +4,11 @@
 # Template File: templates/nrms-api/nrms-api-deploy.yaml
 #=========================================================
 # NAME=nrms-api
-# SOURCE_IMAGE_NAME=nrms-api
 APPLICATION_DOMAIN=nrms-api-nrms-prod.pathfinder.gov.bc.ca
 # IMAGE_NAMESPACE=nrms-tools
+# SOURCE_IMAGE_NAME=nrms-api
 TAG_NAME=prod
-ASPNETCORE_ENVIRONMENT=Production
+# ASPNETCORE_ENVIRONMENT=Production
 # CPU_LIMIT=1
 # MEMORY_LIMIT=4Gi
 # CPU_REQUEST=100m

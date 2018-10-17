@@ -32,6 +32,7 @@ namespace Gcpe.Hub.NRMS.Controllers
             _mapper = mapper;
         }
 
+        [NonAction]
         public IEnumerable<NewsRelease> GetResultsPage(NewsReleaseParams newsReleaseParams)
         {
             var newsReleases = _repository.GetAllReleases();
@@ -69,7 +70,10 @@ namespace Gcpe.Hub.NRMS.Controllers
             {
                 var release = _repository.GetReleaseByKey(id);
 
-                if (release != null) return Ok(_mapper.Map<NewsRelease, NewsReleaseViewModel>(release));
+                if (release != null)
+                {
+                    return Ok(_mapper.Map<NewsRelease, NewsReleaseViewModel>(release));
+                }
                 else return NotFound();
             }
             catch (Exception ex)
@@ -123,8 +127,10 @@ namespace Gcpe.Hub.NRMS.Controllers
             try
             {
                 var oldRelease = _repository.GetReleaseByKey(id);
-                if (oldRelease == null) return NotFound($"Could not find a release with an id of {id}");
-
+                if (oldRelease == null)
+                {
+                    return NotFound($"Could not find a release with an id of {id}");
+                }
                 _repository.Update(id, model);
                 return Ok(model);
             }
@@ -144,8 +150,10 @@ namespace Gcpe.Hub.NRMS.Controllers
             try
             {
                 var oldRelease = _repository.GetReleaseByKey(id);
-                if (oldRelease == null) return NotFound($"Could not find release with id of {id}");
-
+                if (oldRelease == null)
+                {
+                    return NotFound($"Could not find release with id of {id}");
+                }
                 _repository.Delete(oldRelease);
                 return Ok();
             }

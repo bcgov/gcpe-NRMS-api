@@ -137,7 +137,7 @@ parameters:
       The ASP Net Core deployment environment setting, e.g., Development,
       Staging, Production
     required: true
-    value: Development
+    value: Production
   - name: CPU_LIMIT
     displayName: CPU Limit
     description: Maximum amount of CPU the container can use.

@@ -27,10 +27,13 @@ namespace Gcpe.Hub.NRMS.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get(string newsReleaseId)
+        public IActionResult GetAll(string newsReleaseId)
         {
             var release = _repository.GetReleaseByKey(newsReleaseId);
-            if (release != null) return Ok(_mapper.Map<IEnumerable<NewsReleaseLog>, IEnumerable<NewsReleaseLogViewModel>>(release.Logs));
+            if (release != null)
+            {
+                return Ok(_mapper.Map<IEnumerable<NewsReleaseLog>, IEnumerable<NewsReleaseLogViewModel>>(release.Logs));
+            }
             return NotFound();
         }
 
@@ -47,7 +50,6 @@ namespace Gcpe.Hub.NRMS.Controllers
                 }
             }
             return NotFound();
-
         }
 
 
