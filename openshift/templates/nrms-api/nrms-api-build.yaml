@@ -92,7 +92,7 @@ parameters:
     displayName: Source Image Tag
     description: The tag of the source image.
     required: true
-    value: 2.1-7
+    value: 2.1-10
   - name: DOTNET_STARTUP_PROJECT
     displayName: DotNet Startup Project
     description: The path to the startup project for the .Net application.
@@ -105,9 +105,8 @@ parameters:
       files or folders containing a single project file. dotnet test is invoked
       for each item.
     required: true
-    value:
-      Gcpe.Hub.NRMS/Gcpe.Hub.NRMS.Tests
-      Gcpe.Hub.NRMS/Gcpe.Hub.NRMS.IntegrationTests
+    value: |-
+      Gcpe.Hub.NRMS/Gcpe.Hub.NRMS.Tests Gcpe.Hub.NRMS/Gcpe.Hub.NRMS.IntegrationTests
   - name: DOTNET_RM_SRC
     displayName: Remove DotNet source code
     description:

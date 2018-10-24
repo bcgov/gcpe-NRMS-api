@@ -100,7 +100,7 @@ namespace Gcpe.Hub.NRMS.Data
                     ImageURL = $"{ministryImages[rnd.Next(ministryImages.Count())]}",
                     Ministry = $"{ministry}", // pick a random ministry
                     Region = $"{region}",
-                    PublicationDate = DateTime.UtcNow.AddDays(-(rnd.NextDouble() * 90 - 30)), // vary the pub date between 30 and 90 days ago 
+                    PublicationDate = DateTime.UtcNow.AddDays(-(rnd.NextDouble() * 90 - 30)), // vary the pub date between 30 and 90 days ago
                     TimeToRead = rnd.Next(1, 10)
                 };
 
